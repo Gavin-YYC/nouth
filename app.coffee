@@ -13,5 +13,8 @@ app.get '/', (req, res) ->
 app.get '/login', (req, res) ->
     res.render 'login'
 
+app.get '/home', (req, res) ->
+    res.render 'home'
+
 app.listen(8000)
 console.log('Listening on port 8000')
