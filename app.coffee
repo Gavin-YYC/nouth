@@ -8,10 +8,9 @@ app.use express.static(path.join __dirname, 'public')
 app.use express.responseTime()
 app.use express.errorHandler({dumpExceptions: true, showStack: true})
 app.use require('connect-assets')()
-routes = require './routes'
 app.use app.router
+routes = require('./routes')(app)
 
-app.get '/', routes.index
 
 app.get '/login', (req, res) ->
     res.render 'home'
