@@ -4,14 +4,17 @@ app = express()
 
 app.set 'views', path.join __dirname, 'views'
 app.set 'view engine', 'jade'
-app.use(express.static(path.join __dirname, 'public'))
+app.use express.static(path.join __dirname, 'public')
+app.use express.responseTime()
+app.use express.errorHandler({dumpExceptions: true, showStack: true})
 app.use require('connect-assets')()
+routes = require './routes'
+app.use app.router
 
-app.get '/', (req, res) ->
-    res.render 'index'
+app.get '/', routes.index
 
 app.get '/login', (req, res) ->
-    res.render 'login'
+    res.render 'home'
 
 app.get '/home', (req, res) ->
     res.render 'home'

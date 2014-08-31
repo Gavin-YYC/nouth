@@ -1,13 +1,10 @@
-doctype html
-html
-    head
-        title '登录'
-        link(rel="stylesheet", href="css/base.css")
-        link(rel="stylesheet", href="css/login.css")
-    body
-        form
-            h3 登录 
-            input#username(placeholder="用户名")
-            input#username(placeholder="密码")
-            button 登录
+extends layout
+block header
+    title 登录
+block content
+    form
+        h3 登录 
+        input#username(placeholder="用户名")
+        input#username(placeholder="密码")
+        button 登录
 
