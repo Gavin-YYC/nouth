@@ -11,7 +11,7 @@
         "jade":"*",
         "coffee-script":"*",
         "connect-assets":"*",
-        "tingodb":"*",
+        "nedb":"*",
         "passport":"*",
         "passport-local":"*"
     }
