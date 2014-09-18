@@ -1,7 +1,7 @@
 Datastore = require 'nedb'
 db = new Datastore({filename:'taolijie.db'})
 db.loadDatabase (err)->
-        console.log 'hello nedb'
+        console.log 'Database loaded'
 user = {
     username:"admin"
     password:"123"
@@ -15,11 +15,13 @@ exports.login = (req, res) ->
     res.render 'login'
 
 exports.loginAction = (req, res) ->
-    #if req.body.username == 'admin'
-    #    res.render 'index'
     username = req.body.username
-    db.find({username:username},(err,docs)->
-        console.log res.render 'home'
+    password = req.body.password
+    db.find({username:username,password:password},(err,docs)->
+        if docs.length > 0
+            res.redirect 'home'
+        else
+            res.render 'index'
     )
         
 exports.loginSuccess = (req, res) ->

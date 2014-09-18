@@ -11,6 +11,7 @@
         "jade":"*",
         "coffee-script":"*",
         "connect-assets":"*",
+	"body-parser":"*",
         "nedb":"*",
         "passport":"*",
         "passport-local":"*"
