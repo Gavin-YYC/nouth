@@ -1,15 +1,17 @@
 Datastore = require 'nedb'
-db = new Datastore({filename:'taolijie.db'})
-db.loadDatabase (err)->
-        console.log 'Database loaded'
-user = {
-    username:"admin"
-    password:"123"
+posts = new Datastore({filename:'database/posts.db'})
+posts.loadDatabase (err)->
+        console.log 'post db loaded'
+        console.log err
+post = {
+    title:"title"
+    content:"content"
 }
-db.insert user,(err,newDoc)->
+posts.insert post,(err,newDoc)->
+    console.log 'new post inserted'
 
 exports.index = (req, res) ->
-    db.find({},(err,docs)->
+    posts.find({},(err,docs)->
         res.render 'index',docs
     )
 
@@ -19,12 +21,12 @@ exports.login = (req, res) ->
 exports.loginAction = (req, res) ->
     username = req.body.username
     password = req.body.password
-    db.find({username:username,password:password},(err,docs)->
-        if docs.length > 0
-            res.redirect 'home'
-        else
-            res.render 'index'
-    )
+   # db.find({username:username,password:password},(err,docs)->
+   #     if docs.length > 0
+   #         res.redirect 'home'
+   #     else
+   #         res.render 'index'
+   # )
         
 exports.loginSuccess = (req, res) ->
     res.send 'success'
