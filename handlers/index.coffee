@@ -9,7 +9,9 @@ user = {
 db.insert user,(err,newDoc)->
 
 exports.index = (req, res) ->
-    res.render 'index'
+    db.find({},(err,docs)->
+        res.render 'index',docs
+    )
 
 exports.login = (req, res) ->
     res.render 'login'

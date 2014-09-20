@@ -4,6 +4,9 @@
 .ui.menu:not(.vertical) .item > .button{
     margin-right: 10px;
 }
+.row .column{
+    margin-bottom: 15px;
+}
 .ui.message p{
     font-size: 0.8em;
 }
