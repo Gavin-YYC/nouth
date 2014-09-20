@@ -25,32 +25,14 @@ block content
                   a.ui.green.button(href="/post/new") 发布信息
           .ui.hidden.divider
           .ui.grid
-            .two.column.row
-              .column
-                h2.ui.medium.header 传单派发
+            .two.column.row(ms-controller="posts")
+              .column(ms-repeat="posts")
+                h2.ui.medium.header {{el.title}}
                 p
-                  | 义务商品城，周一至周五每天下午5-7点，10元小时,联系电话：18865338775
-              .column
-                h2.ui.medium.header 辅导老师
-                p
-                  | 招聘中小学辅导老师，80元/每天，工作地点：火车站，工作时间3小时左右，联系电话：18812345678
-              .column
-                h2.ui.medium.header 辅导老师
-                p
-                  | 招聘中小学辅导老师，80元/每天，工作地点：火车站，工作时间3小时左右，联系电话：18812345678
-              .column
-                h2.ui.medium.header 传单派发
-                p
-                  | 义务商品城，周一至周五每天下午5-7点，10元小时,联系电话：18865338775
-              .column
-                h2.ui.medium.header 传单派发
-                p
-                  | 义务商品城，周一至周五每天下午5-7点，10元小时,联系电话：18865338775
-              .column
-                h2.ui.medium.header 辅导老师
-                p
-                  | 招聘中小学辅导老师，80元/每天，工作地点：火车站，工作时间3小时左右，联系电话：18812345678
+                  | {{el.content}}
             .row
               .column
                 .ui.divider
                 span © Taolijie 2014
+    script.
+        posts = !{JSON.stringify(posts)}

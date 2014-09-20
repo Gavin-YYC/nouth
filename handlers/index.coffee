@@ -1,19 +1,17 @@
 Datastore = require 'nedb'
 posts = new Datastore({filename:'database/posts.db'})
 posts.loadDatabase (err)->
-        console.log 'post db loaded'
-        console.log err
+        console.log err if err
 post = {
     title:"title"
     content:"content"
 }
 posts.insert post,(err,newDoc)->
-    console.log 'new post inserted'
+    console.log '[test] new post inserted'
 
 exports.index = (req, res) ->
-    posts.find({},(err,docs)->
-        res.render 'index',docs
-    )
+    posts.find({}).limit(10).exec (err,docs)->
+        res.render 'index',{posts:docs}
 
 exports.login = (req, res) ->
     res.render 'login'
