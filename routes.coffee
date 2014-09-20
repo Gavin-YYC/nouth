@@ -13,3 +13,7 @@ module.exports = (app) ->
 
     app.namespace '/post', ->
         app.post 'new',routes.postNew
+
+    app.namespace '/register', ->
+        app.get '/',routes.register
+        app.post '/',routes.registerAction

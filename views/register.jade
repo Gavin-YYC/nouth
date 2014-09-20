@@ -1,19 +1,18 @@
 extends layout
 block header
-    title 登录
-    link(rel="stylesheet" href="css/login.css")
+    title 注册
 block content
     .ui.grid
         .row
         .three.column.row
             .column
             .column
-                form.ui.form.segment(action="/login" method="post")
-                    .ui.header 登录 
+                form.ui.form.segment(action="/register" method="post")
+                    .ui.header 注册 
                     .field
                         .ui.input
                             input#username(name="username", type='text', placeholder='用户名')
                     .field
                         .ui.input
                             input#password(name="password", type='password', placeholder='密码')
-                    input#login.ui.small.blue.button(type="submit" value="登录")
+                    input#login.ui.small.blue.button(type="submit" value="注册")

@@ -1,6 +1,13 @@
 Datastore = require 'nedb'
+
 posts = new Datastore({filename:'database/posts.db'})
+users = new Datastore({filename:'database/user.db'})
+
+
 posts.loadDatabase (err)->
+        console.log err if err
+
+users.loadDatabase (err)->
         console.log err if err
 
 exports.index = (req, res) ->
@@ -13,12 +20,12 @@ exports.login = (req, res) ->
 exports.loginAction = (req, res) ->
     username = req.body.username
     password = req.body.password
-   # db.find({username:username,password:password},(err,docs)->
-   #     if docs.length > 0
-   #         res.redirect 'home'
-   #     else
-   #         res.render 'index'
-   # )
+    users.find({username:username,password:password},(err,docs)->
+        if docs.length > 0
+            res.redirect 'home'
+        else
+            res.redirect 'login'
+    )
         
 exports.loginSuccess = (req, res) ->
     res.send 'success'
@@ -37,3 +44,20 @@ exports.postNew = (req, res) ->
     posts.insert newPost, (err,newDoc) ->
         console.log err if err
         res.send newDoc
+
+exports.register = (req, res) ->
+    res.render 'register'
+
+exports.registerAction = (req, res) ->
+    o = req.body
+    users.find({username: o.username},(err,docs) ->
+        console.log err if err
+        if not docs.length
+            users.insert({username: o.username,password: o.password},(err,docs) ->
+                console.log 'new user added'
+                console.log err if err
+                res.redirect 'home'
+            )
+        else
+            res.redirect 'register'
+        )
