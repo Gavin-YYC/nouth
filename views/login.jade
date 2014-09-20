@@ -3,8 +3,10 @@ block header
     title 登录
     link(rel="stylesheet" href="css/login.css")
 block content
-    form(action="/login" method="post")
+    form.ui.form(action="/login" method="post")
         h3 登录 
-        input#username(placeholder="用户名" name="username")
-        input#password(placeholder="密码" name="password")
+        .ui.input
+            input#username(name="username", type='text', placeholder='邮箱')
+        .ui.input
+            input#password(name="password", type='password', placeholder='密码')
         input#login(type="submit" value="登录")

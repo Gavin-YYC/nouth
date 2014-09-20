@@ -1,7 +1,58 @@
 extends layout
 block header
-    title Index
+        title 桃李街 | 高效的信息发布平台
+        link(rel="stylesheet", href="css/index.css")
 block content
-    h1 Hello world
-    a(href="/home") Home
-    a(href="/login") 登录
+    .page.grid
+      .ui.page.grid
+        .ui.page.grid
+          nav#topnav.ui.text.menu.navbar
+            .left.menu
+              a.item(href='')
+                h3.ui.large.header 桃李街
+            .right.menu
+              a.item(href='/') 首页
+              a.item(href='/about') 关于
+              a.item(href='/help') 帮助
+          .ui.divider
+          .ui.grid
+            .row
+              .column
+                .ui.huge.message.page.grid.center.aligned
+                  h1.ui.medium.header 高效的信息发布平台
+                  p
+                    | 这是一个面向大学校园的信息发布平台，在这里，您可以快速发布信息，第一时间获取您想获得的资源，简单、高效,一步直达。
+                  a.ui.green.button(href="/post/new") 发布信息
+          .ui.hidden.divider
+          .ui.grid
+            .two.column.row
+              .column
+                h2.ui.medium.header 传单派发
+                p
+                  | 义务商品城，周一至周五每天下午5-7点，10元小时,联系电话：18865338775
+              .column
+                h2.ui.medium.header 辅导老师
+                p
+                  | 招聘中小学辅导老师，80元/每天，工作地点：火车站，工作时间3小时左右，联系电话：18812345678
+            .two.column.row
+              .column
+                h2.ui.medium.header 辅导老师
+                p
+                  | 招聘中小学辅导老师，80元/每天，工作地点：火车站，工作时间3小时左右，联系电话：18812345678
+              .column
+                h2.ui.medium.header 传单派发
+                p
+                  | 义务商品城，周一至周五每天下午5-7点，10元小时,联系电话：18865338775
+            .two.column.row
+              .column
+                h2.ui.medium.header 传单派发
+                p
+                  | 义务商品城，周一至周五每天下午5-7点，10元小时,联系电话：18865338775
+              .column
+                h2.ui.medium.header 辅导老师
+                p
+                  | 招聘中小学辅导老师，80元/每天，工作地点：火车站，工作时间3小时左右，联系电话：18812345678
+            .row
+              .column
+                .ui.divider
+                span © Taolijie 2014

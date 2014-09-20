@@ -1,0 +1,9 @@
+.menu .ui.large.header{
+    line-height: 10px;
+}
+.ui.menu:not(.vertical) .item > .button{
+    margin-right: 10px;
+}
+.ui.message p{
+    font-size: 0.8em;
+}
