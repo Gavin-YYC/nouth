@@ -11,3 +11,5 @@ module.exports = (app) ->
         app.get 'success', routes.loginSuccess
         app.get 'failure', routes.loginFailure
 
+    app.namespace '/post', ->
+        app.post 'new',routes.postNew

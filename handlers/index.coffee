@@ -2,15 +2,9 @@ Datastore = require 'nedb'
 posts = new Datastore({filename:'database/posts.db'})
 posts.loadDatabase (err)->
         console.log err if err
-post = {
-    title:"title"
-    content:"content"
-}
-posts.insert post,(err,newDoc)->
-    console.log '[test] new post inserted'
 
 exports.index = (req, res) ->
-    posts.find({}).limit(10).exec (err,docs)->
+    posts.find({}).sort({date:-1}).limit(10).exec (err,docs)->
         res.render 'index',{posts:docs}
 
 exports.login = (req, res) ->
@@ -34,3 +28,12 @@ exports.loginFailure = (req, res) ->
 
 exports.home = (req, res) ->
     res.render 'home'
+
+exports.postNew = (req, res) ->
+    newPost = req.body
+    date = new Date
+    newPost.date = date
+    newPost.ip = req.connection.remoteAddress
+    posts.insert newPost, (err,newDoc) ->
+        console.log err if err
+        res.send newDoc
