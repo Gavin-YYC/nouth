@@ -3,4 +3,41 @@ block header
     title 全部信息
     link(rel="stylesheet", href="css/post.css")
 block content
-    .ui.grid
+    .page.grid
+        .ui.page.grid
+            .ui.page.grid
+                .ui.grid
+                  .two.column.row(ms-controller="posts")
+                    .column(ms-repeat="posts")
+                      h2.ui.medium.header {{el.title}}
+                      p
+                        | {{el.content}}
+                  .one.column.row
+                    .column
+                        #page
+                  .row
+                    .column
+                      .ui.divider
+                      span © Taolijie 2014
+                .ui.modal.post(ms-controller="post_new")
+                    .header 发布信息
+                    .content
+                        form.ui.form(ms-submit="submit")
+                            .ui.input
+                                input(type="text",placeholder="请输入主题，如：传单派发",ms-duplex="o.title")
+                                textarea(placeholder="请输入具体内容:",ms-duplex="o.content")
+                    .actions
+                        .ui.negative.button 取消
+                        input#post-submit-btn.ui.positive.right.button(type="submit",ms-click="submit",value="发布")
+block footer
+    script.
+        posts = !{JSON.stringify(posts)}
+        pagination = !{JSON.stringify(pagination)}
+        count = pagination.count
+        page = pagination.page
+        pages = pagination.pages
+        for(i=1;i<=pages;i++){
+            page_html = '<a href="/post?page='+i+'">第' + i + '页</a>'
+            $('#page').append(page_html)
+        }
+    != js("post")
