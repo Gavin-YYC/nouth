@@ -4,16 +4,25 @@ express-namespase = require 'express-namespace'
 path = require 'path'
 
 app = express()
+
 app.set 'views', path.join __dirname, 'views'
 app.set 'view engine', 'jade'
+
 app.use express.static(path.join __dirname, 'public')
 app.use express.responseTime()
 app.use express.errorHandler({dumpExceptions: true, showStack: true})
 app.use require('connect-assets')()
+
 ## bodyParser above app.router
 app.use bodyParser.json()
 app.use bodyParser.urlencoded()
+
+## session
+app.use express.cookieParser()
+app.use express.session({secret: 'taolijie'})
+
 app.use app.router
+
 #jade format html
 app.locals.pretty = true
 

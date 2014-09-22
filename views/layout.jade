@@ -13,14 +13,17 @@ html
                 .left.menu
                   a.item(href='/')
                     h3.ui.large.header 桃李街
-                .right.menu
+                .right.menu(ms-controller="user")
                   a.item(href='/') 首页
-                  a.item(href='/login') 登录
-                  a.item(href='/register') 注册
+                  a.item(ms-if="!user.username" href='/login') 登录
+                  a.item(ms-if="!user.username" href='/register') 注册
+                  a.item(ms-if="user.username",ms-href="/user/{{user.username}}") {{user.username}}
               .ui.divider
         block content
         script(src="js/jquery-1.11.1.js")
-        script(src="js/avalon.js")
         script(src="js/semantic.js")
-        != js("base")
+        script(src="js/avalon.js")
         block footer
+        script.
+            user = !{JSON.stringify(user)}
+        != js("base")

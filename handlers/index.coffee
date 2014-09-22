@@ -12,7 +12,11 @@ users.loadDatabase (err)->
 
 exports.index = (req, res) ->
     posts.find({}).sort({date:-1}).limit(10).exec (err,docs)->
-        res.render 'index',{posts:docs}
+        console.log req.session.username
+        res.render 'index',{
+            user:{username:req.session.username},
+            posts:docs
+        }
 
 exports.login = (req, res) ->
     res.render 'login'
@@ -20,21 +24,22 @@ exports.login = (req, res) ->
 exports.loginAction = (req, res) ->
     username = req.body.username
     password = req.body.password
+    req.session.username = username
+    console.log username
     users.find({username:username,password:password},(err,docs)->
         if docs.length > 0
             res.redirect 'home'
         else
-            res.redirect 'login'
+            res.render 'login', {
+                err:{msg:"用户名或密码"}
+            }
     )
-        
-exports.loginSuccess = (req, res) ->
-    res.send 'success'
-
-exports.loginFailure = (req, res) ->
-    res.send 'failure'
 
 exports.home = (req, res) ->
-    res.render 'home'
+    if (req.session.username)
+        res.render 'home',{user:{
+            username:req.session.username
+        }}
 
 exports.post = (req, res) ->
     if req.query.page
@@ -45,12 +50,17 @@ exports.post = (req, res) ->
     offset = size*(page-1)
     posts.find({}).sort({date:-1}).skip(offset).limit(size).exec (err,docs)->
         posts.count({},(err, count) ->
-            console.log count
-            res.render 'post',{posts:docs,pagination:{
-                count: count
-                page: page
-                pages: Math.ceil(count/size)
-            }}
+            res.render 'post',{
+                user:{
+                    username:'admin'
+                },
+                posts:docs,
+                pagination:{
+                    count: count
+                    page: page
+                    pages: Math.ceil(count/size)
+                }
+            }
         )
 exports.postNew = (req, res) ->
     newPost = req.body
@@ -69,11 +79,20 @@ exports.registerAction = (req, res) ->
     users.find({username: o.username},(err,docs) ->
         console.log err if err
         if not docs.length
-            users.insert({username: o.username,password: o.password},(err,docs) ->
+            id = (new Date()).getTime()
+            users.insert({
+                username: o.username
+                password: o.password
+                id: id
+            }
+            (err,docs) ->
                 console.log 'new user added'
                 console.log err if err
+                req.session.username = o.username
                 res.redirect 'home'
             )
         else
-            res.redirect 'register'
+            res.render 'register',{
+                err:{msg:"该用户名已注册"}
+            }
         )

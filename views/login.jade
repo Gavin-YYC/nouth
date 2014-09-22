@@ -10,6 +10,7 @@ block content
             .column
                 form.ui.form.segment(action="/login" method="post")
                     .ui.header 登录 
+                    .ui(ms-if="err.msg") {{err.msg}}
                     .field
                         .ui.input
                             input#username(name="username", type='text', placeholder='用户名')
@@ -17,3 +18,9 @@ block content
                         .ui.input
                             input#password(name="password", type='password', placeholder='密码')
                     input#login.ui.small.blue.button(type="submit" value="登录")
+block footer
+    script.
+        user = {}
+        err = !{JSON.stringify(err)}
+        {}
+    !=js('login')
