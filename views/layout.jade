@@ -6,8 +6,21 @@ html
         link(rel="stylesheet", href="css/base.css")
         block header
     body
+        .page.grid
+          .ui.page.grid
+            .ui.page.grid
+              nav#topnav.ui.text.menu.navbar
+                .left.menu
+                  a.item(href='')
+                    h3.ui.large.header 桃李街
+                .right.menu
+                  a.item(href='/') 首页
+                  a.item(href='/login') 登录
+                  a.item(href='/register') 注册
+              .ui.divider
         block content
         script(src="js/jquery-1.11.1.js")
         script(src="js/avalon.js")
         script(src="js/semantic.js")
-        != js("index")
+        != js("base")
+        block footer

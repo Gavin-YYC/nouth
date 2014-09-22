@@ -36,6 +36,10 @@ exports.loginFailure = (req, res) ->
 exports.home = (req, res) ->
     res.render 'home'
 
+exports.post = (req, res) ->
+    posts.find({}).sort({date:-1}).exec (err,docs)->
+        res.render 'post',{posts:docs}
+    
 exports.postNew = (req, res) ->
     newPost = req.body
     date = new Date

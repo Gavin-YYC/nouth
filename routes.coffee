@@ -12,6 +12,7 @@ module.exports = (app) ->
         app.get 'failure', routes.loginFailure
 
     app.namespace '/post', ->
+        app.get '/',routes.post
         app.post 'new',routes.postNew
 
     app.namespace '/register', ->
