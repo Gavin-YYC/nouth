@@ -2,8 +2,8 @@ doctype html
 html
     head
         meta(charset="utf-8")
-        link(rel="stylesheet", href="css/semantic.css")
-        link(rel="stylesheet", href="css/base.css")
+        link(rel="stylesheet", href="/css/semantic.css")
+        link(rel="stylesheet", href="/css/base.css")
         block header
     body
         .page.grid
@@ -17,12 +17,15 @@ html
                   a.item(href='/') 首页
                   a.item(ms-if="!user.username" href='/login') 登录
                   a.item(ms-if="!user.username" href='/register') 注册
-                  a.item(ms-if="user.username",ms-href="/user/{{user.username}}") {{user.username}}
+                  a.ui.dropdown.item(ms-if="user.username",ms-href="/home/{{user.uid}}") {{user.username}}
+                      div.menu.ui.transition.hidden
+                          a.item hello
+                  a.item(ms-if="user.username",ms-href="/logout/{{user.uid}}") 退出
               .ui.divider
         block content
-        script(src="js/jquery-1.11.1.js")
-        script(src="js/semantic.js")
-        script(src="js/avalon.js")
+        script(src="/js/jquery-1.11.1.js")
+        script(src="/js/semantic.js")
+        script(src="/js/avalon.js")
         block footer
         script.
             user = !{JSON.stringify(user)}

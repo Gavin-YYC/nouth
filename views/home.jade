@@ -1,6 +1,14 @@
 extends layout
 block content
-    h1.ui.blue.header This is Home
+    .page.grid
+        .ui.page.grid
+            .ui.page.grid
+                .ui.grid 
+                    .one.column.row
+                        .column
+                            .menu
+                                a.blue.small.header.item(href="#post") 信息
+                                a.green.small.header.item(href="#user") 用户
+                    .two.column.row 
+                        .column
 block footer
-    script.
-        user = !{JSON.stringify(user)}

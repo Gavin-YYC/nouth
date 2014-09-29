@@ -18,3 +18,13 @@ module.exports = (app) ->
     app.namespace '/register', ->
         app.get '/',routes.register
         app.post '/',routes.registerAction
+
+    app.namespace '/home', ->
+        app.get '/:uid',routes.home
+
+    app.namespace '/admin', ->
+        app.get '/post',routes.postAdmin
+        app.get '/user',routes.userAdmin
+
+    app.namespace '/logout', ->
+        app.get '/:uid', routes.logout
