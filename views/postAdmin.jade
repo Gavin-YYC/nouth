@@ -1,0 +1,37 @@
+extends layout
+block header
+    title 全部信息
+    link(rel="stylesheet", href="css/post.css")
+block content
+    .page.grid
+        .ui.page.grid
+            .ui.page.grid
+                .ui.grid
+                  .one.column.row(ms-controller="posts")
+                    .column
+                        table.ui.table.segment
+                            tr(ms-repeat="posts")
+                               td {{el.title}} 
+                               td {{el.content}}
+                               td {{el.date}}
+                               td
+                                a(href="javascript:void(0)",ms-click="remove($remove,el)") 删除
+                  .one.column.row
+                    .column
+                        #page
+                  .row
+                    .column
+                      .ui.divider
+                      span © Taolijie 2014
+block footer
+    script.
+        posts = !{JSON.stringify(posts)}
+        pagination = !{JSON.stringify(pagination)}
+        count = pagination.count
+        page = pagination.page
+        pages = pagination.pages
+        for(i=1;i<=pages;i++){
+            page_html = '<a href="?page='+i+'">第' + i + '页</a>'
+            $('#page').append(page_html)
+        }
+    != js("post")
