@@ -33,6 +33,9 @@ block content
                     .content
                         form.ui.form(ms-submit="submit")
                             .ui.input
+                                label 分类:
+                                select(ms-each-option="options" ms-duplex="o.category" id="category")
+                                    option(ms-value="option") {{option}}
                                 input(type="text",placeholder="请输入主题，如：传单派发",ms-duplex="o.title")
                                 textarea(placeholder="请输入具体内容:",ms-duplex="o.content")
                     .actions

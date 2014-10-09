@@ -17,7 +17,8 @@ html
                   a.item(href='/') 首页
                   a.item(ms-if="!user.username" href='/login') 登录
                   a.item(ms-if="!user.username" href='/register') 注册
-                  a.ui.dropdown.item(ms-if="user.username",ms-href="/home/{{user.uid}}") {{user.username}}
+                  a.ui.dropdown.item(ms-if="user.username && user.group == 'admin'",ms-href="/home/{{user.uid}}") {{user.username}}
+                  a.ui.dropdown.item(ms-if="user.username && user.group == 'user'",href="/admin/post") {{user.username}}
                       div.menu.ui.transition.hidden
                           a.item hello
                   a.item(ms-if="user.username",ms-href="/logout/{{user.uid}}") 退出

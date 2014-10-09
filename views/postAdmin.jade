@@ -13,7 +13,7 @@ block content
                             tr(ms-repeat="posts")
                                td {{el.title}} 
                                td {{el.content}}
-                               td {{el.date}}
+                               td {{el.date|date('yyyy-MM-dd HH:mm:ss')}}
                                td
                                 a(href="javascript:void(0)",ms-click="remove($remove,el)") 删除
                   .one.column.row

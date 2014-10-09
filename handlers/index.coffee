@@ -32,7 +32,11 @@ exports.loginAction = (req, res) ->
             req.session.username = username
             req.session.uid = docs[0].id
             req.session.group = docs[0].group
-            res.redirect 'home/'+docs[0].id
+            console.log docs[0].group
+            if docs[0].group == 'admin'
+                res.redirect 'home'
+            else
+                res.redirect '/admin/post'
         else
             res.render 'login', {
                 err:{msg:"用户名或密码"}
@@ -90,7 +94,6 @@ exports.postNew = (req, res) ->
 
 exports.postRemove = (req, res) ->
     o = req.body
-    console.log o.id
     id = parseInt(o.id)
     posts.remove({id:id},{},(err,num) ->
         console.log err if err
@@ -113,14 +116,15 @@ exports.registerAction = (req, res) ->
                 group: 'user'
             })
             req.session.username = o.username
-            res.redirect 'home'+id
-            res.render 'home',{
-                user:{
-                    username: o.username
-                    uid: id
-                    group: 'user'
-                }
-            }
+            req.session.uid = id
+            res.redirect '/'
+            #res.render 'home',{
+            #    user:{
+            #        username: o.username
+            #        uid: id
+            #        group: 'user'
+            #    }
+            #}
         else
             res.render 'register',{
                 err:{msg:"该用户名已注册"}
@@ -136,10 +140,8 @@ exports.postAdmin = (req, res) ->
         size = 20
         offset = size*(page-1)
         uid = req.session.uid
-        console.log 'uid:'+uid
         posts.find({uid:uid}).sort({date:-1}).skip(offset).limit(size).exec (err,docs)->
             posts.count({},(err, count) ->
-                console.log docs
                 res.render 'postAdmin',{
                     user:{
                         username: req.session.username
