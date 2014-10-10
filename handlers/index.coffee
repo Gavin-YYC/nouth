@@ -32,7 +32,6 @@ exports.loginAction = (req, res) ->
             req.session.username = username
             req.session.uid = docs[0].id
             req.session.group = docs[0].group
-            console.log docs[0].group
             if docs[0].group == 'admin'
                 res.redirect 'home'
             else

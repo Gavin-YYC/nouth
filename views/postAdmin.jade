@@ -1,7 +1,7 @@
 extends layout
 block header
     title 全部信息
-    link(rel="stylesheet", href="css/post.css")
+    link(rel="stylesheet", href="css/postAdmin.css")
 block content
     .page.grid
         .ui.page.grid
@@ -9,12 +9,10 @@ block content
                 .ui.grid
                   .one.column.row(ms-controller="posts")
                     .column
-                        table.ui.table.segment
-                            tr(ms-repeat="posts")
-                               td {{el.title}} 
-                               td {{el.content}}
-                               td {{el.date|date('yyyy-MM-dd HH:mm:ss')}}
-                               td
+                        .ui.segment.post(ms-repeat="posts")
+                            .ui.medium.header {{el.title}}
+                            div {{el.content}}
+                                p {{el.date | date('yyyy-MM-dd HH:mm:ss')}}
                                 a(href="javascript:void(0)",ms-click="remove($remove,el)") 删除
                   .one.column.row
                     .column
