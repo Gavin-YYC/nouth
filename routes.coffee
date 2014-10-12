@@ -15,6 +15,7 @@ module.exports = (app) ->
         app.get '/',routes.post
         app.post 'new',routes.postNew
         app.post 'remove',routes.postRemove
+        app.post 'update',routes.postUpdate
 
     app.namespace '/register', ->
         app.get '/',routes.register

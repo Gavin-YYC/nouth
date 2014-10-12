@@ -18,7 +18,7 @@ avalon.define "post_new",(v)->
             V.post_new.o = {
                 category:''
                 title:''
-                conent:''
+                content:''
                 }
        )
     false

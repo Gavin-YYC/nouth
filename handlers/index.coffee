@@ -82,6 +82,7 @@ exports.post = (req, res) ->
         )
 exports.postNew = (req, res) ->
     newPost = req.body
+    console.log newPost.content
     date = new Date
     newPost.date = date
     newPost.ip = req.connection.remoteAddress
@@ -94,9 +95,23 @@ exports.postNew = (req, res) ->
 exports.postRemove = (req, res) ->
     o = req.body
     id = parseInt(o.id)
+    console.log id
     posts.remove({id:id},{},(err,num) ->
         console.log err if err
         console.log num+' post removed'
+    )
+
+exports.postUpdate = (req, res) ->
+    o = req.body
+    new_o = {}
+    id = parseInt(o.id)
+    new_o.category = o.category
+    new_o.title = o.title
+    new_o.content = o.content
+    console.log new_o
+    posts.update({id:id},{$set:new_o},{},(err,num) ->
+        console.log err if err
+        console.log num+' post update'
     )
 
 exports.register = (req, res) ->
@@ -138,8 +153,12 @@ exports.postAdmin = (req, res) ->
             page = 1
         size = 20
         offset = size*(page-1)
-        uid = req.session.uid
-        posts.find({uid:uid}).sort({date:-1}).skip(offset).limit(size).exec (err,docs)->
+        
+        spec = {}
+        if req.session.group != "admin"
+            spec = {uid:req.session.uid}
+            
+        posts.find(spec).sort({date:-1}).skip(offset).limit(size).exec (err,docs)->
             posts.count({},(err, count) ->
                 res.render 'postAdmin',{
                     user:{
