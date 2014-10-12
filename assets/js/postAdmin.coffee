@@ -13,6 +13,9 @@ avalon.define "posts", (v) ->
             console.log 'a post removed'
         )
 
+    v.cancel = (o)->
+        o.edit = !o.edit
+
     v.submit =(o) ->
         console.log o.id
         new_o = new Object()

@@ -1,0 +1,20 @@
+.post-category{
+    font-size: 14px;
+    color: #aaa;
+    margin-left: 15px;
+}
+.ui.button{
+    margin-right: 5px;
+}
+input{
+    padding: 0 5px;
+    width: 300px;
+    height: 30px;
+}
+textarea{
+    padding: 5px;
+    width: 600px;
+    height: 80px;
+    display: block;
+    margin: 15px 0;
+}
