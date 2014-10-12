@@ -1,10 +1,13 @@
 avalon.define "posts", (v) ->
+
     for i in posts
         i.edit = 0
 
     v.posts = posts
 
+    v.origin = {}
     v.edit = (o)->
+        v.origin = o
         o.edit = !o.edit
 
     v.remove = (rm,o) ->
@@ -15,6 +18,7 @@ avalon.define "posts", (v) ->
 
     v.cancel = (o)->
         o.edit = !o.edit
+        $.extend(o,v.origin)
 
     v.submit =(o) ->
         console.log o.id
