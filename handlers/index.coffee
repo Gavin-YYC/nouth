@@ -15,15 +15,18 @@ categories.loadDatabase (err)->
         console.log err if err
 
 exports.index = (req, res) ->
+    o = new Object
+    o.user={
+        username:req.session.username
+        uid: req.session.uid
+        group: req.session.group
+    }
     posts.find({}).sort({date:-1}).limit(10).exec (err,docs)->
-        res.render 'index',{
-            user:{
-                username:req.session.username
-                uid: req.session.uid
-                group: req.session.group
-            }
-            posts:docs
-        }
+        o.posts = docs
+        categories.find({},(err,docs)->
+            o.categories = docs
+            res.render 'index',o
+        )
 
 exports.login = (req, res) ->
     res.render 'login'
@@ -86,7 +89,6 @@ exports.post = (req, res) ->
         )
 exports.postNew = (req, res) ->
     newPost = req.body
-    console.log newPost.content
     date = new Date
     newPost.date = date
     newPost.ip = req.connection.remoteAddress
@@ -99,7 +101,6 @@ exports.postNew = (req, res) ->
 exports.postRemove = (req, res) ->
     o = req.body
     id = parseInt(o.id)
-    console.log id
     posts.remove({id:id},{},(err,num) ->
         console.log err if err
         console.log num+' post removed'
@@ -112,7 +113,6 @@ exports.postUpdate = (req, res) ->
     new_o.category = o.category
     new_o.title = o.title
     new_o.content = o.content
-    console.log new_o
     posts.update({id:id},{$set:new_o},{},(err,num) ->
         console.log err if err
         console.log num+' post update'
@@ -202,7 +202,6 @@ exports.categoryNew = (req, res) ->
 exports.categoryUpdate = (req, res) ->
     o = req.body
     id = o.id
-    console.log 'update ' + o.id + ' ' + o.name
     categories.update({id:id},{$set:o},{},(err,num) ->
         console.log err if err
         console.log num + 'category updated'

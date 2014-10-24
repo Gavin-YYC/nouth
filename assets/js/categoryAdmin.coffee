@@ -8,8 +8,6 @@ avalon.define "category_new", (v)->
         id = (new Date).getTime()
         o = V.category_new.o.$model
         o.id = id
-        console.log o.name
-        console.log o
         $.post('/category/new',o, ()->
             console.log 'new category'
             o.edit = 0
