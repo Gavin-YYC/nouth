@@ -17,6 +17,11 @@ module.exports = (app) ->
         app.post 'remove',routes.postRemove
         app.post 'update',routes.postUpdate
 
+    app.namespace '/category', ->
+        app.post 'new',routes.categoryNew
+        app.post 'remove',routes.categoryRemove
+        app.post 'update',routes.categoryUpdate
+
     app.namespace '/register', ->
         app.get '/',routes.register
         app.post '/',routes.registerAction
@@ -27,6 +32,7 @@ module.exports = (app) ->
     app.namespace '/admin', ->
         app.get '/post',routes.postAdmin
         app.get '/user',routes.userAdmin
+        app.get '/category',routes.categoryAdmin
 
     app.namespace '/logout', ->
         app.get '/:uid', routes.logout

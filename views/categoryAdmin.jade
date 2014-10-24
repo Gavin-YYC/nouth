@@ -1,0 +1,42 @@
+extends layout
+block header
+    title 全部信息
+    link(rel="stylesheet", href="/css/postAdmin.css")
+block content
+    .page.grid
+        .ui.modal.category(ms-controller="category_new")
+            .header 添加新分类
+            .content
+                form.ui.form
+                    .ui.input
+                        input(type="text",placeholder="请输入分类名称",ms-duplex="o.name")
+                    .actions
+                        .ui.negative.button 取消
+                        .ui.positive.right.button(type="submit",ms-click="submit") 添加
+        .ui.page.grid
+            .ui.page.grid
+                .ui.grid
+                  .one.column.row(ms-controller="categories")
+                    .column
+                        a.ui.blue.small.button#category-new-btn(href="javascript:void(0)") 添加新分类
+                        .ui.segment.post(ms-repeat="categories")
+                            div(ms-if="!el.edit")
+                                .ui.medium.header {{el.name}}
+                                div
+                                    a.ui.positive.small.button(href="javascript:void(0)",ms-click="edit(el)") 编辑
+                                    a.ui.negative.small.button(href="javascript:void(0)",ms-click="remove($remove,el)") 删除
+                            div(ms-if="el.edit")
+                                input.ui.input.title(ms-duplex="el.name")
+                                br
+                                a.ui.blue.small.button(href="javascript:void(0)" ms-click="submit(el)") 保存
+                                a.ui.small.button(href="javascript:void(0)" ms-click="cancel(el)") 取消 
+                  .one.column.row
+                    .column
+                  .row
+                    .column
+                      .ui.divider
+                      span © Taolijie 2014
+block footer
+    script.
+        categories = !{JSON.stringify(categories)}
+    != js("categoryAdmin")

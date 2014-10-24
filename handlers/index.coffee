@@ -1,13 +1,17 @@
 Datastore = require 'nedb'
 
-posts = new Datastore({filename:'database/posts.db'})
+posts = new Datastore({filename:'database/post.db'})
 users = new Datastore({filename:'database/user.db'})
+categories = new Datastore({filename:'database/category.db'})
 
 
 posts.loadDatabase (err)->
         console.log err if err
 
 users.loadDatabase (err)->
+        console.log err if err
+
+categories.loadDatabase (err)->
         console.log err if err
 
 exports.index = (req, res) ->
@@ -174,3 +178,38 @@ exports.postAdmin = (req, res) ->
                     }
                 }
             )
+
+
+exports.categoryAdmin = (req, res) ->
+    categories.find({}).sort({date:1}).exec (err,docs)->
+    #categories.find({},(err, docs)->
+        res.render 'categoryAdmin',{
+            user:{
+                username: req.session.username
+                uid: req.session.uid
+                group: req.session.group
+            }
+            categories: docs,
+        }
+    #)
+
+exports.categoryNew = (req, res) ->
+    o = req.body
+    categories.insert o, (err,newDoc) ->
+        console.log err if err
+        res.send newDoc
+
+exports.categoryUpdate = (req, res) ->
+    o = req.body
+    id = o.id
+    console.log 'update ' + o.id + ' ' + o.name
+    categories.update({id:id},{$set:o},{},(err,num) ->
+        console.log err if err
+        console.log num + 'category updated'
+    )
+
+exports.categoryRemove = (req, res) ->
+    id = req.body.id
+    categories.remove({id:id},{},(err, num)->
+        console.log num + ' category removed'
+    )
