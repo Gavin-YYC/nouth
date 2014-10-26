@@ -65,27 +65,37 @@ exports.home = (req, res) ->
     }
 
 exports.post = (req, res) ->
+    spec = new Object
+    if req.query.cid
+        spec.category = req.query.cid
+        console.log spec.category
+
     if req.query.page
         page = req.query.page
     else
         page = 1
-    size = 20
+    size = 3
     offset = size*(page-1)
-    posts.find({}).sort({date:-1}).skip(offset).limit(size).exec (err,docs)->
-        posts.count({},(err, count) ->
-            res.render 'post',{
-                user:{
-                    username: req.session.username
-                    uid: req.session.uid
-                    group: req.session.group
-                },
-                posts:docs,
-                pagination:{
-                    count: count
-                    page: page
-                    pages: Math.ceil(count/size)
-                }
+    o = new Object
+    o.user={
+        username: req.session.username
+        uid: req.session.uid
+        group: req.session.group
+    }
+    posts.find(spec).sort({date:-1}).skip(offset).limit(size).exec (err,docs)->
+        o.posts = docs
+        console.log spec
+        posts.count(spec,(err, count) ->
+            console.log count
+            o.pagination={
+                count: count
+                page: page
+                pages: Math.ceil(count/size)
             }
+            categories.find({},(err,docs)->
+                o.categories = docs
+                res.render 'post',o
+            )
         )
 exports.postNew = (req, res) ->
     newPost = req.body
@@ -150,6 +160,7 @@ exports.registerAction = (req, res) ->
         )
 
 exports.postAdmin = (req, res) ->
+    o = new Object
     if (req.session.username)
         if req.query.page
             page = req.query.page
@@ -164,19 +175,21 @@ exports.postAdmin = (req, res) ->
             
         posts.find(spec).sort({date:-1}).skip(offset).limit(size).exec (err,docs)->
             posts.count({},(err, count) ->
-                res.render 'postAdmin',{
-                    user:{
-                        username: req.session.username
-                        uid: req.session.uid
-                        group: req.session.group
-                    }
-                    posts:docs,
-                    pagination:{
-                        count: count
-                        page: page
-                        pages: Math.ceil(count/size)
-                    }
+                o.user = {
+                    username: req.session.username
+                    uid: req.session.uid
+                    group: req.session.group
                 }
+                o.posts = docs
+                o.pagination  = {
+                    page: page
+                    pages: Math.ceil(count/size)
+                }
+                categories.find(spec,(err,docs)->
+                    console.log docs
+                    o.categories = docs
+                    res.render 'postAdmin',o
+                )
             )
 
 

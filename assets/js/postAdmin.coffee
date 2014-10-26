@@ -3,8 +3,17 @@ avalon.define "posts", (v) ->
     for i in posts
         i.edit = 0
 
+    v.options = categories
+
     v.posts = posts
 
+    v.getCate = (cid)->
+            for v,i in categories
+                console.log cid
+                console.log v.id
+                if v.id == cid+''
+                     return categories[i].name
+ 
     v.origin = {}
     v.edit = (o)->
         v.origin = o
