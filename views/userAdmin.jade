@@ -1,0 +1,65 @@
+extends layout
+block header
+    title 全部用户
+    link(rel="stylesheet", href="/css/postAdmin.css")
+block content
+    .page.grid
+        .ui.modal.user(ms-controller="users_new")
+            .header 添加新用户
+            .content
+                form.ui.form(ms-submit="submit")
+                    .field
+                        .ui.input
+                            input#username(type="text",placeholder="请输入用户名",ms-duplex="o.username")
+                    .field
+                        .ui.input
+                            input#password(type="password",placeholder="请输入密码",ms-duplex="o.password")
+                    .grouped.inline.fields
+                        .field
+                            .ui.radio.checkbox
+                                input#power(type="radio",name="power",value="user",checked="checked",ms-duplex="o.power")
+                                label 普通用户
+                        .field
+                            .ui.radio.checkbox
+                                input#power(type="radio",name="power",value="admin")
+                                label 管理员
+                    .actions
+                        .ui.negative.button 取消
+                        .ui.positive.right.button(type="submit",ms-click="submit") 添加
+        .ui.page.grid
+            .ui.page.grid
+                .ui.grid
+                  .one.column.row(ms-controller="users")
+                    .column
+                        a.ui.blue.small.button#user-new-btn(href="javascript:void(0)") 添加新用户
+                        .ui.segment.post(ms-repeat="users")
+                            div(ms-if="!el.edit")
+                                .ui.medium.header {{el.username}} ({{el.group}})
+                                div
+                                    a.ui.positive.small.button(href="javascript:void(0)",ms-click="edit(el)") 编辑
+                                    a.ui.negative.small.button(href="javascript:void(0)",ms-click="remove($remove,el)") 删除
+                            div(ms-if="el.edit")
+                                .field
+                                    label 账户：
+                                    .ui.input
+                                        input.ui.input.title(ms-duplex="el.username",disabled)
+                                .field
+                                    label 密码：
+                                    .ui.input
+                                        input.ui.input.title(ms-duplex="el.password")
+                                .field
+                                    label 权限：
+                                    .ui.input
+                                        input.ui.input.title(ms-duplex="el.group")
+                                a.ui.blue.small.button(href="javascript:void(0)" ms-click="submit(el)") 保存
+                                a.ui.small.button(href="javascript:void(0)" ms-click="cancel(el)") 取消 
+                  .one.column.row
+                    .column
+                  .row
+                    .column
+                      .ui.divider
+                      span © Taolijie 2014
+block footer
+    script.
+        users = !{JSON.stringify(users)}
+    != js("userAdmin")

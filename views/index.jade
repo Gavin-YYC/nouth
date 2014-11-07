@@ -18,7 +18,8 @@ block content
                 .ui.grid
                   .two.column.row(ms-controller="posts")
                     .column(ms-repeat="posts")
-                      h2.ui.medium.header {{el.title}}
+                      h2.ui.medium.header 
+                        a(ms-href="/post/{{el.id}}") {{el.title}}
                       p
                         | {{el.content}}
                   .one.column.row

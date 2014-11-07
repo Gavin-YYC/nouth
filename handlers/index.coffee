@@ -64,6 +64,9 @@ exports.home = (req, res) ->
         }
     }
 
+exports.postDetail = (req,res) ->
+    res.render 'detail'
+
 exports.post = (req, res) ->
     spec = new Object
     if req.query.cid
@@ -97,6 +100,7 @@ exports.post = (req, res) ->
                 res.render 'post',o
             )
         )
+
 exports.postNew = (req, res) ->
     newPost = req.body
     date = new Date
@@ -133,6 +137,7 @@ exports.register = (req, res) ->
 
 exports.registerAction = (req, res) ->
     o = req.body
+    console.log o
     users.find({username: o.username},(err,docs) ->
         console.log err if err
         if not docs.length
@@ -146,13 +151,6 @@ exports.registerAction = (req, res) ->
             req.session.username = o.username
             req.session.uid = id
             res.redirect '/'
-            #res.render 'home',{
-            #    user:{
-            #        username: o.username
-            #        uid: id
-            #        group: 'user'
-            #    }
-            #}
         else
             res.render 'register',{
                 err:{msg:"该用户名已注册"}
@@ -192,6 +190,48 @@ exports.postAdmin = (req, res) ->
                 )
             )
 
+exports.userAdmin = (req, res) ->
+    users.find({}).sort({date:0}).exec (err,docs)->
+        res.render 'userAdmin',{
+            user:{
+                username: req.session.username
+                uid: req.session.uid
+                group: req.session.group
+            }
+            users: docs,
+        }
+
+exports.userNew = (req, res) ->
+    o = req.body
+    users.find({username: o.username},(err,docs) ->
+        console.log err if err
+        if not docs.length
+            users.insert({
+                username: o.username
+                password: o.password
+                id:o.id
+                group: o.power
+            }, (err, newDoc)->
+                console.log err if err
+                res.send newDoc
+            )
+    )
+
+exports.userRemove = (req,res)->
+    o = req.body
+    id = o.id
+    users.remove({id:id},{},(err,doc)->
+        console.log doc
+        res.send doc
+    )
+
+exports.userUpdate = (req,res)->
+    o = req.body
+    id = o.id
+    console.log id
+    users.update({id:id},{$set:o},{},(err,num) ->
+        res.send num
+    )
 
 exports.categoryAdmin = (req, res) ->
     categories.find({}).sort({date:1}).exec (err,docs)->

@@ -3,6 +3,7 @@ routes = require('./handlers')
 module.exports = (app) ->
     app.namespace '/', ->
         app.get '/', routes.index
+        app.get '/:id',routes.postDetail
         app.get 'home', routes.home
 
     app.namespace '/login', ->
@@ -21,6 +22,11 @@ module.exports = (app) ->
         app.post 'new',routes.categoryNew
         app.post 'remove',routes.categoryRemove
         app.post 'update',routes.categoryUpdate
+
+    app.namespace '/user',->
+        app.post 'new',routes.userNew
+        app.post 'remove',routes.userRemove
+        app.post 'update',routes.userUpdate
 
     app.namespace '/register', ->
         app.get '/',routes.register
