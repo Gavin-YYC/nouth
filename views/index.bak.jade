@@ -1,0 +1,137 @@
+extends layout
+block header
+    title 桃李街 | 高效的信息发布平台
+    link(rel="stylesheet", href="css/index.css")
+    link(rel="stylesheet", href="css/pgwslider.min.css")
+block content
+    .page.grid
+        .ui.page.grid
+            .ui.page.grid
+                <!--Left Side-->
+                .twelve.column.wide
+                    <!--The Picture News Display-->
+                    .ui.grid
+                        ul.pgwSlider
+                            li
+                                img(src="img/pic.jpg",alt="Paris, France" data-description="Eiffel Tower and Champ de Mars")
+                            li
+                                img(src="img/pic2.jpg",alt="Paris, France" data-description="Eiffel Tower and Champ de Mars")
+                            li
+                                img(src="img/pic3.jpg",alt="Paris, France" data-description="Eiffel Tower and Champ de Mars")
+                            li
+                                img(src="img/pic4.jpg",alt="Paris, France" data-description="Eiffel Tower and Champ de Mars")
+                    <!--The Quickly Navigation-->
+                    .ui.grid
+                        .sixteen.column.wide(style="padding:0")
+                            .ui.menu.red
+                                a.item.active(href="") 学生兼职
+                                a.item(href="") 家教
+                                a.item(href="") 单页派发
+                                a.item(href="") 服务员
+                                a.item(href="") 销售员
+                                a.item(href="") 小时工
+                                a.item(href="") 礼仪小姐
+                                .right.menu
+                                    a.item(href="") >>
+                            .ui.menu.red
+                                a.item.active(href="") 二手物品
+                                a.item(href="") 自行车
+                                a.item(href="") 电动车
+                                a.item(href="") 摩托车
+                                a.item(href="") 学习资料
+                                a.item(href="") 手机
+                                a.item(href="") 电脑
+                                .right.menu
+                                    a.item(href="") >>
+                            .ui.menu.red
+                                a.item.active(href="") 身边团购
+                                a.item(href="") 蛋糕甜点
+                                a.item(href="") 酒店
+                                a.item(href="") 娱乐KTV
+                                a.item(href="") 化妆品
+                                a.item(href="") 自助餐
+                                a.item(href="") 美发
+                                .right.menu
+                                    a.item(href="") >>
+                            .ui.menu.red
+                                a.item.active(href="") 周边美食
+                                a.item(href="") 避风塘
+                                a.item(href="") 鸡公煲
+                                a.item(href="") 华莱士
+                                a.item(href="") 小四川
+                                a.item(href="") 肉夹馍
+                                a.item(href="") 麻辣烫
+                                .right.menu
+                                    a.item(href="") >>
+                            .ui.menu.red
+                                a.item.active(href="") 驾校招生
+                                a.item(href="") 远东
+                                a.item(href="") 国安
+                                a.item(href="") 服务员
+                                a.item(href="") 销售员
+                                a.item(href="") 小时工
+                                a.item(href="") 礼仪小姐
+                                .right.menu
+                                    a.item(href="") >>
+                <!--Right Side-->
+                .four.column.wide
+                    <!--The News Display-->
+                    .sixteen.column.wide
+                        .ui.tabular.menu.top.attached
+                            a.item.active 公告
+                            a.item 学生最爱
+                        .ui.bottom.attached.segment
+                            img.ui.medium.image(src="img/pic.jpg")
+                            .ui.divider
+                            p 桃李街网站运行
+                            .ui.divider
+                            p 桃李街网站运行
+                            .ui.divider
+                            p 桃李街网站运行
+                    .ui.divider.horizontal.icon
+                        i.circular.heart.icon.red
+                    <!--Contact Us-->
+                    .sixteen.column.wide
+                        .ui.segment
+                            .ui.top.attached.label.icon
+                                i.phone.icon.big
+                                span 联系我们
+                            p 电话：18369956016
+                            p QQ：954150410
+                            p 微信：q954150410
+    .ui.page.grid
+        .ui.page.grid
+            .ui.hidden.divider
+            .ui.grid
+              .two.column.row(ms-controller="posts")
+                .column(ms-repeat="posts")
+                  h2.ui.medium.header 
+                    a(ms-href="/post/{{el.id}}") {{el.title}}
+                  p
+                    | {{el.content}}
+              .one.column.row
+                .column
+                    a.ui.medium.blue.button(href="/post") 查看全部
+              .row
+                .column
+                  .ui.divider
+                  span © Taolijie 2014
+            .ui.modal.post(ms-controller="post_new")
+                .header 发布信息
+                .content
+                    form.ui.form(ms-submit="submit")
+                        .ui.input
+                            label 分类:
+                            select(ms-each-option="options" ms-duplex="o.category" id="category")
+                                option(ms-value="option.id") {{option.name}}
+                            input(type="text",placeholder="请输入主题，如：彩世界传单派发",ms-duplex="o.title")
+                            textarea(placeholder="请输入具体内容:",ms-duplex="o.content")
+                .actions
+                    .ui.negative.button 取消
+                    input#post-submit-btn.ui.positive.right.button(type="submit",ms-click="submit",value="发布")
+block footer
+    script(src="js/pgwslider.min.js")
+    script.
+        posts = !{JSON.stringify(posts)}
+        categories = !{JSON.stringify(categories)}
+    != js("index")

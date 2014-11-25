@@ -1,5 +1,6 @@
 #首页发布信息对话框
 $('.ui.modal.post').modal('attach events','#post-new-btn','show')
+$('.pgwSlider').pgwSlider();
 
 avalon.define "posts",(v)->
     v.posts = posts

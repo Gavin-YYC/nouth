@@ -1,3 +1,79 @@
 .ui.message p{
     font-size: 0.8em;
 }
+#example .icon.example .grid .column:hover .icon {
+    color: #009FDA;
+    -webkit-transform: scale(1.5);
+    -moz-transform: scale(1.5);
+    -o-transform: scale(1.5);
+    -ms-transform: scale(1.5);
+    transform: scale(1.5);
+    -webkit-transition:
+        all 0.2s ease-out
+        ;
+    -moz-transition:
+        all 0.2s ease-out
+        ;
+    -o-transition:
+        all 0.2s ease-out
+        ;
+    -ms-transition:
+        all 0.2s ease-out
+        ;
+    transition:
+        all 0.2s ease-out
+        ;
+}
+.topbar{
+    width: 100%;
+    height: 35px;
+    background:rgba(0, 0, 0, 0.5) none repeat scroll 0 0 !important;/*实现FF背景透明，文字不透明*/
+    filter:Alpha(opacity=50); background:#fff;
+}
+.menubar{
+    width: 100%;
+    height: 100px;
+    background:rgba(255, 255, 255, 0.5) none repeat scroll 0 0 !important;/*实现FF背景透明，文字不透明*/
+    filter:Alpha(opacity=50); background:#fff;
+}
+.topbar .ui .wide .menu a{
+    color: #ffffff;
+}
+.fourline{
+    margin-top: 20px;
+    width: 100%;
+}
+.bigbutton{
+    width: 720px;
+    height: 200px;
+    margin: 0 auto;
+}
+.bigbutton > div {
+    float: left;
+    width: 117px;
+    margin-left: 27px;
+    height: 135px;
+    text-align: center;
+    line-height: 135px;
+    font-size: 24px;
+}
+.bigbutton > div > a{
+    color: #fff;    
+}
+.jianzhi{
+    background: url("/img/1.png") no-repeat;
+}
+.jiaoyou{
+    margin-top: 35px;
+    background: url("/img/2.png") no-repeat;
+}
+.ershou{
+    background: url("/img/3.png") no-repeat;
+}
+.binguan{
+    margin-top: 35px;
+    background: url("/img/4.png") no-repeat;
+}
+.tougao{
+    background: url("/img/5.png") no-repeat;
+}

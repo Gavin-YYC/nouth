@@ -6,23 +6,43 @@ html
         link(rel="stylesheet", href="/css/base.css")
         block header
     body
-        .page.grid
-          .ui.page.grid
-            .ui.page.grid
-              nav#topnav.ui.text.menu.navbar
-                .left.menu
-                  a.item(href='/')
-                    h3.ui.large.header 桃李街
-                .right.menu(ms-controller="user")
-                  a.item(href='/') 首页
-                  a.item(ms-if="!user.username" href='/login') 登录
-                  a.item(ms-if="!user.username" href='/register') 注册
+        .row.topbar
+          .ui.grid
+            .two.wide.column
+            .twelve.wide.column(style="margin:0px;")
+              .menu.secondary.ui.red(ms-controller="user")
+                a.item 山东理工大学
+                a.item [切换学校 淄职 山工业 山铝]
+                a.item
+                  i.cloud.icon
+                  span 天气预报
+                .right.menu
+                  a.item(ms-if="!user.username",href="/login") 登陆
+                  .item |
+                  a.item(ms-if="!user.username",href="/register") 注册
                   a.ui.dropdown.item(ms-if="user.username && user.group == 'admin'",ms-href="/home/{{user.uid}}") {{user.username}}
                   a.ui.dropdown.item(ms-if="user.username && user.group == 'user'",href="/admin/post") {{user.username}}
                       div.menu.ui.transition.hidden
                           a.item hello
+                  a.item.ui.button.black(ms-if="user.username",href="javascript:void(0)" id="post-new-btn") 发布信息
                   a.item(ms-if="user.username",ms-href="/logout/{{user.uid}}") 退出
-              .ui.divider
+        .row.menubar
+          .ui.grid
+            .two.wide.column
+            .twelve.wide.column
+              .ui.grid
+                .four.wide.column(style="margin-top:0")
+                  a(href="/")
+                    img(src="/img/logo.png")
+                .twelve.wide.column
+                  .ui.secondary.pointing.menu.right.red
+                    a.active.item(href="/") 首页
+                    a.item(href="/") 校园兼职
+                    a.item(href="/") 恋爱结缘
+                    a.item(href="/") 二手物品
+                    a.item(href="/") 宾馆预订
+                    a.item(href="/") 发布信息
+                    a.item(href="/") 加入我们
         block content
         script(src="/js/jquery-1.11.1.js")
         script(src="/js/semantic.js")

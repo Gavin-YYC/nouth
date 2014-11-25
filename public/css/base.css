@@ -4,8 +4,9 @@ body,div,ul,li,h3{
 }
 body{
     font-family: 'Open Sans', 'sans-serif','微软雅黑';
-    margin-bottom: 60px;
-    background: url('/images/brickwall.png');
+    background: #f8f7e5 url(/img/bg.jpg) no-repeat center top;
+    width: 100%;
+    display: table;
 }
 ul li{
     list-style:none;
@@ -42,3 +43,4 @@ a:link,a:visited,a:hover,a:active{
 .row .column{
     margin-bottom: 15px;
 }
+img{border: none}

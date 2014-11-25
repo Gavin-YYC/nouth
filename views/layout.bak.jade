@@ -1,0 +1,77 @@
+doctype html
+html
+    head
+        meta(charset="utf-8")
+        link(rel="stylesheet", href="/css/semantic.css")
+        link(rel="stylesheet", href="/css/base.css")
+        block header
+    body
+        .page.grid
+          .ui.page.grid
+            .ui.page.grid
+              nav#topnav.ui.text.menu
+                .left.menu
+                  a.item(href='/')
+                    h3.ui.large.header 桃李街
+                .right.menu(ms-controller="user")
+                  a.item
+                  a.item
+                    .ui.icon.input
+                      input(type="text",placeholder="兼职、二手...")
+                      i.search.icon.link
+                  a.item(href='/') 首页
+                  a.item(ms-if="!user.username" href='/login') 登录
+                  a.item(ms-if="!user.username" href='/register') 注册
+                  a.ui.dropdown.item(ms-if="user.username && user.group == 'admin'",ms-href="/home/{{user.uid}}") {{user.username}}
+                  a.ui.dropdown.item(ms-if="user.username && user.group == 'user'",href="/admin/post") {{user.username}}
+                      div.menu.ui.transition.hidden
+                          a.item hello
+                  a.item.ui.button(ms-if="user.username",href="javascript:void(0)" id="post-new-btn") 发布信息
+                  a.item(ms-if="user.username",ms-href="/logout/{{user.uid}}") 退出
+              .ui.divider
+              .ui.menu.menuSecond.inverted.red
+                a.item(href="/") 首页
+                a.item 兼职招聘
+                a.item 跳蚤市场
+                a.item 校园生活
+                a.item 创业跳板
+                a.item 官方微信
+                a.item 关于我们
+                a.item 联系我们
+              .ui.grid
+                  .row#example
+                      .column.icon.example
+                          .ui.huge.message.page.grid.center.aligned.nine.column.red
+                            .column(style="margin-top:16px")
+                              i.circular.user.icon.large.link
+                              span 学生兼职
+                            .column#shakeMe
+                              i.circular.glass.icon.large.link
+                              span 周边美食
+                            .column
+                              i.circular.cart.icon.large.link
+                              span 身边团购
+                            .column
+                              i.circular.gift.icon.large.link
+                              span 全新物品
+                            .column
+                              i.circular.dashboard.icon.large.link
+                              span 驾校招生
+                            .column
+                              i.circular.laptop.icon.large.link
+                              span 二手物品
+                            .column
+                              i.circular.gamepad.icon.large.link
+                              span 娱乐休闲
+                            .column
+                              i.circular.home.icon.large.link
+                              span 旅店
+
+        block content
+        script(src="/js/jquery-1.11.1.js")
+        script(src="/js/semantic.js")
+        script(src="/js/avalon.js")
+        block footer
+        script.
+            user = !{JSON.stringify(user)}
+        != js("base")

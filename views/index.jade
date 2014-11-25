@@ -3,47 +3,29 @@ block header
     title 桃李街 | 高效的信息发布平台
     link(rel="stylesheet", href="css/index.css")
 block content
-    .page.grid
-        .ui.page.grid
-            .ui.page.grid
-                .ui.grid 
-                    .row 
-                        .column
-                            .ui.huge.message.page.grid.center.aligned
-                                h1.ui.medium.header 高效的信息发布平台
-                                p
-                                    | 这是一个面向大学校园的信息发布平台，在这里，您可以快速发布信息，第一时间获取您想获得的资源，简单、高效,一步直达。
-                                a.ui.green.button(href="javascript:void(0)" id="post-new-btn") 发布信息
-                .ui.hidden.divider
-                .ui.grid
-                  .two.column.row(ms-controller="posts")
-                    .column(ms-repeat="posts")
-                      h2.ui.medium.header 
-                        a(ms-href="/post/{{el.id}}") {{el.title}}
-                      p
-                        | {{el.content}}
-                  .one.column.row
-                    .column
-                        a.ui.medium.blue.button(href="/post") 查看全部
-                  .row
-                    .column
-                      .ui.divider
-                      span © Taolijie 2014
-                .ui.modal.post(ms-controller="post_new")
-                    .header 发布信息
-                    .content
-                        form.ui.form(ms-submit="submit")
-                            .ui.input
-                                label 分类:
-                                select(ms-each-option="options" ms-duplex="o.category" id="category")
-                                    option(ms-value="option.id") {{option.name}}
-                                input(type="text",placeholder="请输入主题，如：彩世界传单派发",ms-duplex="o.title")
-                                textarea(placeholder="请输入具体内容:",ms-duplex="o.content")
-                    .actions
-                        .ui.negative.button 取消
-                        input#post-submit-btn.ui.positive.right.button(type="submit",ms-click="submit",value="发布")
+    .page(style="text-align:center;color:#fff")
+        .row
+            .ui.center.aligned 
+                h1 桃李街
+        .row
+            .ui.center.aligned 
+                h1 中国大学生自己的网站
+        .row
+            .ui.center.aligned 
+                h1 兼职、购物、娱乐、出行一一俱全
+        .row
+            .ui.center.aligned 
+                p 你的喜好我知道！给我你的信任，还你一份真诚。给我你的期待，还你一份满意。
+    .row.fourline
+        .bigbutton
+            .jianzhi
+                a(href="/") 校园兼职
+            .jiaoyou 
+                a(href="/") 恋爱交友
+            .ershou 
+                a(href="/") 二手物品
+            .binguan 
+                a(href="/") 宾馆预订
+            .tougao 
+                a(href="/") 发布信息
 block footer
-    script.
-        posts = !{JSON.stringify(posts)}
-        categories = !{JSON.stringify(categories)}
-    != js("index")
