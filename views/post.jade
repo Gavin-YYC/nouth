@@ -2,38 +2,57 @@ extends layout
 block header
     title 全部信息
     link(rel="stylesheet", href="css/index.css")
+    link(rel="stylesheet", href="css/jianzhiBg.css")
 block content
-    .page.grid
+    .page.grid(style="margin-top:16px;")
         .ui.page.grid
             .ui.page.grid
-                  .ui.grid(ms-controller="posts")
-                      .five.wide.column
-                        .ui.vertical.pointing.menu
-                            a.blue.small.header.item(href="/post") 全部
-                            a.blue.small.header.item(ms-repeat="categories" ms-href="?cid={{el.id}}") {{el.name}}
-                      .ten.wide.column
-                        .ui.segment.column(ms-repeat="posts")
-                          h2.ui.medium.header {{el.title}}
-                          p
-                            | {{el.content}}
-                        .one.column.row
-                          .column
-                            #page
-                  .row
-                    .column
-                      .ui.divider
-                      span © Taolijie 2014
-                .ui.modal.post(ms-controller="post_new")
-                    .header 发布信息
-                    .content
-                        form.ui.form(ms-submit="submit")
-                            .ui.input
-                                input(type="text",placeholder="请输入主题，如：传单派发",ms-duplex="o.title")
-                                textarea(placeholder="请输入具体内容:",ms-duplex="o.content")
-                    .actions
-                        .ui.negative.button 取消
-                        input#post-submit-btn.ui.positive.right.button(type="submit",ms-click="submit",value="发布")
+              .row.rollerPic
+                .banner
+                    ul
+                        li
+                            img(src="/img/pic1.jpg")
+                        li
+                            img(src="/img/pic2.jpg")
+                        li
+                            img(src="/img/pic3.jpg")
+              .row.transparentBg(ms-controller="posts")
+                  .menuLeft
+                    .firstMenu
+                        .title1 我们的服务
+                        .content
+                            .ui.vertical.pointing.menu
+                                a.blue.small.header.item(href="/post") 全部
+                                a.blue.small.header.item(ms-repeat="categories" ms-href="?cid={{el.id}}") {{el.name}}
+                    .lastMent
+
+                    .taoljNews
+                        .title 桃李街
+                        .content nhao
+                  .menuRight
+                    .row.postNews(ms-repeat="posts")
+                        .title {{el.title}}
+                        .content 
+                            p {{el.content}}
+                    .one.column.row
+                      .column
+                        #page
+            .ui.modal.post(ms-controller="post_new")
+                .header 发布信息
+                .content
+                    form.ui.form(ms-submit="submit")
+                        .ui.input
+                            input(type="text",placeholder="请输入主题，如：传单派发",ms-duplex="o.title")
+                            textarea(placeholder="请输入具体内容:",ms-duplex="o.content")
+                .actions
+                    .ui.negative.button 取消
+                    input#post-submit-btn.ui.positive.right.button(type="submit",ms-click="submit",value="发布")
+    .row.copyright
+        p © Taolijie 2014 &nbsp;By：山东理工大学桃李街团队
 block footer
+    script(src="/js/unslider.min.js")
+    script.
+        $(function() {$('.banner').unslider({dots: true,fluid: true});});
     script.
         posts = !{JSON.stringify(posts)}
         categories = !{JSON.stringify(categories)}

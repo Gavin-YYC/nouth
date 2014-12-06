@@ -4,9 +4,10 @@ body,div,ul,li,h3{
 }
 body{
     font-family: 'Open Sans', 'sans-serif','微软雅黑';
-    background: #f8f7e5 url(/img/bg.jpg) no-repeat center top;
+    background: #f5f5f5 url(/img/bg.jpg) no-repeat center top;
     width: 100%;
     display: table;
+    overflow-x: hidden;
 }
 ul li{
     list-style:none;

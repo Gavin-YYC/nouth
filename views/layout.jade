@@ -7,13 +7,12 @@ html
         block header
     body
         .row.topbar
-          .ui.grid
-            .two.wide.column
+          .ui.grid.center.aligned
             .twelve.wide.column(style="margin:0px;")
               .menu.secondary.ui.red(ms-controller="user")
-                a.item 山东理工大学
-                a.item [切换学校 淄职 山工业 山铝]
-                a.item
+                a.item.left 山东理工大学
+                a.item.left [切换学校 淄职 山工业 山铝]
+                a.item.left
                   i.cloud.icon
                   span 天气预报
                 .right.menu
@@ -27,8 +26,7 @@ html
                   a.item.ui.button.black(ms-if="user.username",href="javascript:void(0)" id="post-new-btn") 发布信息
                   a.item(ms-if="user.username",ms-href="/logout/{{user.uid}}") 退出
         .row.menubar
-          .ui.grid
-            .two.wide.column
+          .ui.grid.center.aligned
             .twelve.wide.column
               .ui.grid
                 .four.wide.column(style="margin-top:0")
@@ -37,12 +35,22 @@ html
                 .twelve.wide.column
                   .ui.secondary.pointing.menu.right.red
                     a.active.item(href="/") 首页
-                    a.item(href="/") 校园兼职
+                    a.item(href="/post") 校园兼职
                     a.item(href="/") 恋爱结缘
                     a.item(href="/") 二手物品
                     a.item(href="/") 宾馆预订
                     a.item(href="/") 发布信息
                     a.item(href="/") 加入我们
+        .ui.modal.post(ms-controller="post_new")
+            .header 发布信息
+            .content
+                form.ui.form(ms-submit="submit")
+                    .ui.input
+                        input(type="text",placeholder="请输入主题，如：传单派发",ms-duplex="o.title")
+                        textarea(placeholder="请输入具体内容:",ms-duplex="o.content")
+            .actions
+                .ui.negative.button 取消
+                input#post-submit-btn.ui.positive.right.button(type="submit",ms-click="submit",value="发布")
         block content
         script(src="/js/jquery-1.11.1.js")
         script(src="/js/semantic.js")

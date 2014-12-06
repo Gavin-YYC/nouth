@@ -24,21 +24,27 @@
         all 0.2s ease-out
         ;
 }
+
+/* Layout 头部导航样式 */
 .topbar{
     width: 100%;
     height: 35px;
     background:rgba(0, 0, 0, 0.5) none repeat scroll 0 0 !important;/*实现FF背景透明，文字不透明*/
-    filter:Alpha(opacity=50); background:#fff;
+    filter:Alpha(opacity=50); 
+    background:#fff;
 }
 .menubar{
     width: 100%;
     height: 100px;
-    background:rgba(255, 255, 255, 0.5) none repeat scroll 0 0 !important;/*实现FF背景透明，文字不透明*/
-    filter:Alpha(opacity=50); background:#fff;
+    background:rgba(255, 255, 255, 0.8) none repeat scroll 0 0 !important;/*实现FF背景透明，文字不透明*/
+    filter:Alpha(opacity=80); 
+    background:#fff;
 }
 .topbar .ui .wide .menu a{
     color: #ffffff;
 }
+
+/* index页面 五个导航按钮 */
 .fourline{
     margin-top: 20px;
     width: 100%;
@@ -57,8 +63,20 @@
     line-height: 135px;
     font-size: 24px;
 }
+.bigbutton .smallbtn{
+    transition:all 0.5s ease-in;
+    -webkit-transition:all 0.5s ease-in;
+    -moz-transition:all 0.5s ease-in;
+    -o-transition:all 0.5s ease-in;
+}
 .bigbutton > div > a{
-    color: #fff;    
+    color: #fff;
+}
+.bigbutton .smallbtn:hover{
+    -webkit-transform:rotate(360deg);
+    -moz-transform:rotate(360deg);
+    -o-transform:rotate(360deg);
+    transform:rotate(360deg);
 }
 .jianzhi{
     background: url("/img/1.png") no-repeat;
@@ -76,4 +94,139 @@
 }
 .tougao{
     background: url("/img/5.png") no-repeat;
+}
+
+/* post页面 */
+.rollerPic{
+    width: 100%;
+    height: 195px;
+    margin-top: 18px;
+}
+.transparentBg{
+    width: 100%;
+    height: 600px;
+    background: rgba(255,255,255,0.7) none repeat scroll 0 0 !important;
+}
+.menuLeft{
+    width: 30%;
+    float: left;
+}
+.menuLeft .firstMenu{
+    width: 60%;
+    height: 200px;
+    float: left;
+    background: red;
+}
+.menuLeft .firstMenu .title1{
+    width: 100%;
+    height: 30px;
+    line-height: 30px;
+    text-align: center;
+    background: #ec2d00;
+}
+.menuLeft .lastMent{
+    width: 40%;
+    height: 200px;
+    float: left;
+    background: #f3cec6;
+}
+.taoljNews{
+    width: 95%;
+    height: 200px;
+    background: #fff;
+    clear: both;
+}
+.taoljNews .title{
+    width: 100%;
+    height: 40px;
+    text-align: left;
+    line-height: 40px;
+    border: 1px solid #cbcbcb;
+}
+.taoljNews .content{
+    width: 100%;
+    height: 300px;
+    border: 1px solid #cbcbcb;
+    border-top: 0px;
+}
+
+.menuRight{
+    width: 69%;
+    float: left;
+}
+.postNews{
+    width: 100%;
+    height: 170px;
+    overflow: hidden;
+}
+.postNews .title{
+    width: 100%;
+    height: 40px;
+    background: #f1552f;
+    line-height: 40px;
+    padding-left: 20px;
+    font-size: 23px;
+    color: #fff;
+}
+.postNews .content{
+    width: 100%;
+    height: 120px;
+    border: 1px solid #cfcfcf;
+    border-top-color: transparent;
+    -webkit-transition:all 0.5s ease;
+    -moz-transition:all 0.5s ease;
+    -o-transition:all 0.5s ease;
+    transition:all 0.5s ease;
+}
+.postNews:hover .content{
+    border-bottom: 2px solid red;
+}
+
+
+/*图片轮播*/
+.banner { 
+    position: relative; 
+    overflow: auto; 
+}
+.banner li { 
+    list-style: none; 
+}
+.banner ul li { 
+    float: left; 
+    height: 195px;
+    }
+.banner .dots{ 
+    position: absolute; 
+    right: 7%; 
+    bottom: 10%;
+}
+.banner .dots li {
+    display: inline-block;
+    width: 10px;
+    height: 10px;
+    margin: 0 4px;
+    text-indent: -999em;
+    border: 2px solid #fff;
+    border-radius: 6px;
+    cursor: pointer;
+    opacity: .4;
+    -webkit-transition: background .5s, opacity .5s;
+    -moz-transition: background .5s, opacity .5s;
+    transition: background .5s, opacity .5s;
+}
+.banner .dots li.active {
+    background: #fff;
+    opacity: 1;
+}
+
+
+/* 底部信息 */
+.copyright{
+    width: 100%;
+    height: 50px;
+    text-align: center;
+    line-height: 50px;
+    background: rgba(0,0,0,0.5);
+    color: #fff;
+    clear: both;
 }
