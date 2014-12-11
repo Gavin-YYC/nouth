@@ -4,10 +4,13 @@ avalon.define "category_new", (v)->
     v.o = {
         name: ''
     }
+    v.cateClass = "1"
     v.submit = ->
         id = (new Date).getTime()
         o = V.category_new.o.$model
         o.id = id
+        o.cateClass = v.cateClass
+        console.log(o.cateClass)
         $.post('/category/new',o, ()->
             console.log 'new category'
             o.edit = 0
@@ -25,6 +28,7 @@ avalon.define "categories", (v) ->
     v.categories = categories
 
     v.origin = {}
+    v.show = ""
     v.edit = (o)->
         v.origin = o
         o.edit = !o.edit
@@ -44,5 +48,12 @@ avalon.define "categories", (v) ->
         o.edit = !o.edit
         $.post('/category/update',{id:o.id,name:o.name}, ()->
             console.log 'a category updated'
+        )
+    v.showCateLast = (o)->
+        console.log 'ID'+o.id
+        $.post('/category/categoryLast',{cateClass:o.id},(date)->
+            v.show += date.name
+            console.log 'yes'
+            for
         )
 

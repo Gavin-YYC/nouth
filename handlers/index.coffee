@@ -233,8 +233,9 @@ exports.userUpdate = (req,res)->
         res.send num
     )
 
+# 获取所有栏目
 exports.categoryAdmin = (req, res) ->
-    categories.find({}).sort({date:1}).exec (err,docs)->
+    categories.find({cateClass:"1"}).sort({date:1}).exec (err,docs)->
     #categories.find({},(err, docs)->
         res.render 'categoryAdmin',{
             user:{
@@ -245,6 +246,17 @@ exports.categoryAdmin = (req, res) ->
             categories: docs,
         }
     #)
+
+# 获取二级栏目
+exports.categoryLast = (req, res) ->
+    o = req.body
+    console.log(o)
+    categories.find(o, (err,docs)->
+        console.log err if err
+        res.send docs
+    )
+
+
 
 exports.categoryNew = (req, res) ->
     o = req.body

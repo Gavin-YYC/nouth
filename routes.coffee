@@ -22,6 +22,7 @@ module.exports = (app) ->
         app.post 'new',routes.categoryNew
         app.post 'remove',routes.categoryRemove
         app.post 'update',routes.categoryUpdate
+        app.post  'categoryLast',routes.categoryLast
 
     app.namespace '/user',->
         app.post 'new',routes.userNew
