@@ -47,7 +47,25 @@ html
                 form.ui.form(ms-submit="submit")
                     .ui.input
                         input(type="text",placeholder="请输入主题，如：传单派发",ms-duplex="o.title")
-                        textarea(placeholder="请输入具体内容:",ms-duplex="o.content")
+                        
+                    .ui.input
+                      .ui.selection.dropdown.blue.labeled.button.pointing
+                        input(type="hidden" name="gender")
+                        .default.text 一级分类
+                        i.dropdown.icon
+                        .menu
+                            .item(data-value="1") 男
+                            .item(data-value="0") 女
+
+                      .ui.selection.dropdown.red.labeled.button.pointing
+                        input(type="hidden" name="gender")
+                        .default.text 二级分类
+                        i.dropdown.icon
+                        .menu
+                            .item(data-value="1") 男
+                            .item(data-value="0") 女
+
+                    textarea(placeholder="请输入具体内容:",ms-duplex="o.content")
             .actions
                 .ui.negative.button 取消
                 input#post-submit-btn.ui.positive.right.button(type="submit",ms-click="submit",value="发布")

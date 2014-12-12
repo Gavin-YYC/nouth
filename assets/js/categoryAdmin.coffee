@@ -12,9 +12,7 @@ avalon.define "category_new", (v)->
         o.cateClass = v.cateClass
         console.log(o.cateClass)
         $.post('/category/new',o, ()->
-            console.log 'new category'
             o.edit = 0
-            V.categories.categories.unshift(o)
             V.category_new.o = {
                 name: ''
             }
@@ -28,7 +26,7 @@ avalon.define "categories", (v) ->
     v.categories = categories
 
     v.origin = {}
-    v.show = ""
+    v.show = "二级标题"
     v.edit = (o)->
         v.origin = o
         o.edit = !o.edit
@@ -49,11 +47,11 @@ avalon.define "categories", (v) ->
         $.post('/category/update',{id:o.id,name:o.name}, ()->
             console.log 'a category updated'
         )
-    v.showCateLast = (o)->
-        console.log 'ID'+o.id
-        $.post('/category/categoryLast',{cateClass:o.id},(date)->
-            v.show += date.name
-            console.log 'yes'
-            for
-        )
 
+    v.showCateLast = (o)->
+        v.show =""
+        $.post('/category/categoryLast',{cateClass:o.id},(data)->
+            for i in data
+                v.show += i.name
+                console.log i
+        )

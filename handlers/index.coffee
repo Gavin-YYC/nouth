@@ -250,7 +250,6 @@ exports.categoryAdmin = (req, res) ->
 # 获取二级栏目
 exports.categoryLast = (req, res) ->
     o = req.body
-    console.log(o)
     categories.find(o, (err,docs)->
         console.log err if err
         res.send docs

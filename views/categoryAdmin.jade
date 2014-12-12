@@ -19,6 +19,19 @@ block content
                     .actions
                         .ui.negative.button 取消
                         .ui.positive.right.button(type="submit",ms-click="submit") 添加
+        .page.ui.grid.column(ms-controller="categories")
+            .four.wide.column
+                .ui.vertical.menu
+                    .header.item
+                        i.user.icon
+                        span 一级栏目
+                    .item(ms-repeat="categories")
+                        a(href="javascript:void(0)",ms-click="showCateLast(el)") {{el.name}}
+                    a.item#category-new-btn(href="javascript:void(0)")
+                        span 添加新分类
+            .ten.wide.column(ms-duplex="show")
+                p {{show}}
+        
         .ui.page.grid
             .ui.page.grid
                 .ui.grid
@@ -32,8 +45,6 @@ block content
                                     a.ui.blue.small.button(href="javascript:void(0)",ms-click="showCateLast(el)") 显示子栏目
                                     a.ui.positive.small.button(href="javascript:void(0)",ms-click="edit(el)") 编辑
                                     a.ui.negative.small.button(href="javascript:void(0)",ms-click="remove($remove,el)") 删除
-                                div(ms-duplex="show")
-                                    p {{show}}
                             div(ms-if="el.edit")
                                 input.ui.input.title(ms-duplex="el.name")
                                 br
@@ -45,12 +56,6 @@ block content
                     .column
                       .ui.divider
                       span © Taolijie 2014
-        
-        each cateFirst,i in categories
-            if(cateFirst.cateClass=="1")
-                p V#{cateFirst.name}
-            else
-                p #{cateFirst.name}
 block footer
     script.
         categories = !{JSON.stringify(categories)}
