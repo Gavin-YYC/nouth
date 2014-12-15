@@ -19,11 +19,10 @@ html
                   a.item(ms-if="!user.username",href="/login") 登陆
                   .item |
                   a.item(ms-if="!user.username",href="/register") 注册
-                  a.ui.dropdown.item(ms-if="user.username && user.group == 'admin'",ms-href="/home/{{user.uid}}") {{user.username}}
-                  a.ui.dropdown.item(ms-if="user.username && user.group == 'user'",href="/admin/post") {{user.username}}
+                  a.ui.item(ms-if="user.username && user.group == 'admin'",ms-href="/home/{{user.uid}}") {{user.username}}
+                  a.ui.item(ms-if="user.username && user.group == 'user'",href="/admin/post") {{user.username}}
                       div.menu.ui.transition.hidden
                           a.item hello
-                  a.item.ui.button.black(ms-if="user.username",href="javascript:void(0)" id="post-new-btn") 发布信息
                   a.item(ms-if="user.username",ms-href="/logout/{{user.uid}}") 退出
         .row.menubar
           .ui.grid.center.aligned
@@ -41,34 +40,6 @@ html
                     a.item(href="/") 宾馆预订
                     a.item(href="/") 发布信息
                     a.item(href="/") 加入我们
-        .ui.modal.post(ms-controller="post_new")
-            .header 发布信息
-            .content
-                form.ui.form(ms-submit="submit")
-                    .ui.input
-                        input(type="text",placeholder="请输入主题，如：传单派发",ms-duplex="o.title")
-                        
-                    .ui.input
-                      .ui.selection.dropdown.blue.labeled.button.pointing
-                        input(type="hidden" name="gender")
-                        .default.text 一级分类
-                        i.dropdown.icon
-                        .menu
-                            .item(data-value="1") 男
-                            .item(data-value="0") 女
-
-                      .ui.selection.dropdown.red.labeled.button.pointing
-                        input(type="hidden" name="gender")
-                        .default.text 二级分类
-                        i.dropdown.icon
-                        .menu
-                            .item(data-value="1") 男
-                            .item(data-value="0") 女
-
-                    textarea(placeholder="请输入具体内容:",ms-duplex="o.content")
-            .actions
-                .ui.negative.button 取消
-                input#post-submit-btn.ui.positive.right.button(type="submit",ms-click="submit",value="发布")
         block content
         script(src="/js/jquery-1.11.1.js")
         script(src="/js/semantic.js")

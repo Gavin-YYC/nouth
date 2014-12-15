@@ -16,39 +16,105 @@ block content
                             img(src="/img/pic2.jpg")
                         li
                             img(src="/img/pic3.jpg")
-              .row.transparentBg(ms-controller="posts")
+              .row.transparentBg(style="padding-top:0",ms-controller="posts")
                   .menuLeft
                     .firstMenu
                         .title1 我们的服务
                         .content
-                            .ui.vertical.pointing.menu
-                                a.blue.small.header.item(href="/post") 全部
-                                a.blue.small.header.item(ms-repeat="categories" ms-href="?cid={{el.id}}") {{el.name}}
+                            ul
+                                li
+                                    a(href="javascript:void(0)",ms-click="showCateLast(1418290678479)") 
+                                        i.icon.time 
+                                        span 校园兼职
+                                li
+                                    a(href="javascript:void(0)",ms-click="showCateLast(1418290692160)")
+                                        i.icon.users  
+                                        span 千与千寻
+                                li
+                                    a(href="javascript:void(0)",ms-click="showCateLast(1418290701919)")
+                                        i.icon.cart  
+                                        span 二手物品
+                                li
+                                    a(href="javascript:void(0)",ms-click="showCateLast(1418290709877)")
+                                        i.icon.home   
+                                        span 宾馆预订
+                                li
+                                    a#post-new-btn(href="javascript:void(0)")
+                                        i.icon.ok.circle   
+                                        span 发布信息
                     .lastMent
+                        div(ms-duplex="show")
+                            ul {{show|html}}
 
+                    div(style="clear:both")
                     .taoljNews
-                        .title 桃李街
-                        .content nhao
+                        .title
+                            i.sort.attributes.descending.icon
+                            span 桃李街资讯榜
+                        .content
+                            ul
+                                li.top
+                                    span.toppic 1
+                                    a(href="") 桃李街网站测试
+                                li.top
+                                    span.toppic 2
+                                    a(href="") 桃李街网站测试
+                                li.top
+                                    span.toppic 3
+                                    a(href="") 桃李街网站测试
+                                li
+                                    span.toppic 4
+                                    a(href="") 桃李街网站测试
+                                li
+                                    span.toppic 5
+                                    a(href="") 桃李街网站测试
+                                li
+                                    span.toppic 6
+                                    a(href="") 桃李街网站测试
+                                li
+                                    span.toppic 7
+                                    a(href="") 桃李街网站测试
+                                li
+                                    span.toppic 8
+                                    a(href="") 桃李街网站测试
+                                li
+                                    span.toppic 9
+                                    a(href="") 桃李街网站测试
+                                li
+                                    span.toppic 10
+                                    a(href="") 桃李街网站测试
                   .menuRight
                     .row.postNews(ms-repeat="posts")
                         .title {{el.title}}
                         .content 
                             p {{el.content}}
-                    .one.column.row
+                    .one.column.row.pages
                       .column
                         #page
-            .ui.modal.post(ms-controller="post_new")
-                .header 发布信息
-                .content
-                    form.ui.form(ms-submit="submit")
-                        .ui.input
-                            input(type="text",placeholder="请输入主题，如：传单派发",ms-duplex="o.title")
-                            textarea(placeholder="请输入具体内容:",ms-duplex="o.content")
-                .actions
-                    .ui.negative.button 取消
-                    input#post-submit-btn.ui.positive.right.button(type="submit",ms-click="submit",value="发布")
     .row.copyright
         p © Taolijie 2014 &nbsp;By：山东理工大学桃李街团队
+    .ui.modal.post(ms-controller="post_new")
+        .header 发布信息
+        .content
+            form.ui.form(ms-submit="submit")
+                .ui.input
+                    input(type="text",placeholder="请输入主题，如：传单派发",ms-duplex="o.title")
+                    
+                .ui.input
+                    .ui.dropdown 
+                      .text 一级栏目
+                      i.dropdown.icon
+                      .menu 
+                        each cate,i in categories
+                            .item(ms-click="showCateLast(#{cate.id})") #{cate.name}
+
+                    select(ms-duplex="cateClass")
+                        option(ms-repeat="show") {{el.id}}
+
+                textarea(placeholder="请输入具体内容:",ms-duplex="o.content")
+        .actions
+            .ui.negative.button 取消
+            input#post-submit-btn.ui.positive.right.button(type="submit",ms-click="submit",value="发布")
 block footer
     script(src="/js/unslider.min.js")
     script.

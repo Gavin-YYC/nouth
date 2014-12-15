@@ -37,7 +37,6 @@ block content
                 .ui.grid
                   .one.column.row(ms-controller="categories")
                     .column
-                        a.ui.blue.small.button#category-new-btn(href="javascript:void(0)") 添加新分类
                         .ui.segment.post(ms-repeat="categories")
                             div(ms-if="!el.edit")
                                 .ui.medium.header {{el.name}}
@@ -59,4 +58,5 @@ block content
 block footer
     script.
         categories = !{JSON.stringify(categories)}
+
     != js("categoryAdmin")

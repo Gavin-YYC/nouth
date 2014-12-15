@@ -77,7 +77,7 @@ exports.post = (req, res) ->
         page = req.query.page
     else
         page = 1
-    size = 3
+    size = 6
     offset = size*(page-1)
     o = new Object
     o.user={
@@ -95,7 +95,7 @@ exports.post = (req, res) ->
                 page: page
                 pages: Math.ceil(count/size)
             }
-            categories.find({},(err,docs)->
+            categories.find({cateClass:"1"},(err,docs)->
                 o.categories = docs
                 res.render 'post',o
             )
